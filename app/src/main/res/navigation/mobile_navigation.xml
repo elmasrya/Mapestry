@@ -7,13 +7,13 @@
 
     <fragment
         android:id="@+id/nav_home"
-        android:name="com.andrewelmasry.mapestry.ui.home.HomeFragment"
+        android:name="com.andrewelmasry.mapestry.ui.map.MapFragment"
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/nav_gallery"
-        android:name="com.andrewelmasry.mapestry.ui.gallery.GalleryFragment"
+        android:name="com.andrewelmasry.mapestry.ui.bottomsheet.BottomSheetFragment"
         android:label="@string/menu_gallery"
         tools:layout="@layout/fragment_gallery" />
 

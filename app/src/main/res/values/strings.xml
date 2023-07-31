@@ -10,4 +10,22 @@
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
+    <string name="mapbox_access_token">pk.eyJ1IjoiYWVsbWFzcnkiLCJhIjoiY2xrMHJvdXdoMDAzZjNncjFwMWxiNTU1YSJ9.HLV5wRCzMxNpZWs6th0j-g</string>
+    <string name="mapbox_style_url">mapbox://styles/aelmasry/clkla8o6x014c01qwb9e0aw1j</string>
+    <string name="trigram">&#9776;</string>
+    <string name="open">Open</string>
+    <string name="mapestry_editor">Mapestry Editor</string>
+    <string name="select_map_component_label">Select Map Component:</string>
+    <string name="edit_colors_label">Edit Colors: </string>
+    <string name="visibility_label">Visibility:</string>
+    <string name="polygons">Polygons</string>
+    <string name="visibility_on">On</string>
+    <string name="visibility_off">Off</string>
+    <string name="points">Points</string>
+    <string name="background">Background</string>
+    <string name="hue_label">Hue: </string>
+    <string name="alpha_label">Alpha: </string>
+    <string name="place_holder">--</string>
+    <string name="save">Save &#8634;</string>
+    <string name="cancel">Cancel &#8855;</string>
 </resources>
