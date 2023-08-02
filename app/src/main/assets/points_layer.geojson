@@ -1,0 +1,85 @@
+{
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Cheval Parking Spot",
+        "color": "#87CEEB",
+        "alpha": 1
+      },
+      "geometry": {
+        "coordinates": [
+          -82.515355,
+          28.150785
+        ],
+        "type": "Point"
+      },
+      "id": "9a9b225c5f17c34185fb223e3a25dee0"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Ivy Lake Parking Spot",
+        "color": "#87CEEB",
+        "alpha": 1
+      },
+      "geometry": {
+        "coordinates": [
+          -82.549186,
+          28.178614
+        ],
+        "type": "Point"
+      },
+      "id": "9c4e57907f928ae082245b4a7575d347"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Tampa Bay Golf Course Parking Spot",
+        "color": "#87CEEB",
+        "alpha": 1
+      },
+      "geometry": {
+        "coordinates": [
+          -82.533471,
+          28.154657
+        ],
+        "type": "Point"
+      },
+      "id": "b6a2a1e6e79967bcb7d96878723e2d70"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Home Parking Spot",
+        "color": "#87CEEB",
+        "alpha": 1
+      },
+      "geometry": {
+        "coordinates": [
+          -82.540754,
+          28.17225
+        ],
+        "type": "Point"
+      },
+      "id": "c12382995313377ea29df3de81cd1246"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Marsh Trail Parking Spot",
+        "color": "#87CEEB",
+        "alpha": 1
+      },
+      "geometry": {
+        "coordinates": [
+          -82.541519,
+          28.165336
+        ],
+        "type": "Point"
+      },
+      "id": "dc229a4ed5405ddb72f8e2bf7f6facec"
+    }
+  ],
+  "type": "FeatureCollection"
+}

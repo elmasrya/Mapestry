@@ -1,0 +1,97 @@
+{
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Sunlake East Line",
+        "color": "#90EE90",
+        "alpha": 1,
+        "width": 5
+      },
+      "geometry": {
+        "coordinates": [
+          [
+            -82.498646,
+            28.179336
+          ],
+          [
+            -82.498563,
+            28.155972
+          ]
+        ],
+        "type": "LineString"
+      },
+      "id": "4e2700060c6ab5527c818f373a6c27c5"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Conservation Line",
+        "color": "#90EE90",
+        "alpha": 1,
+        "width": 5
+      },
+      "geometry": {
+        "coordinates": [
+          [
+            -82.533431,
+            28.176927
+          ],
+          [
+            -82.508004,
+            28.186491
+          ]
+        ],
+        "type": "LineString"
+      },
+      "id": "64299aad6527f2d25ab59fd868276d04"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Tarramor West Line",
+        "color": "#90EE90",
+        "alpha": 1,
+        "width": 5
+      },
+      "geometry": {
+        "coordinates": [
+          [
+            -82.545903,
+            28.172809
+          ],
+          [
+            -82.545702,
+            28.157927
+          ]
+        ],
+        "type": "LineString"
+      },
+      "id": "b40c0be39184bc2841487ba67f5708b5"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Odessa South Line",
+        "color": "#90EE90",
+        "alpha": 1,
+        "width": 5
+      },
+      "geometry": {
+        "coordinates": [
+          [
+            -82.534431,
+            28.155913
+          ],
+          [
+            -82.515962,
+            28.155183
+          ]
+        ],
+        "type": "LineString"
+      },
+      "id": "f54f5bed45c1f64bd57b167131e64112"
+    }
+  ],
+  "type": "FeatureCollection"
+}

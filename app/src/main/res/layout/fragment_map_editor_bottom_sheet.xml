@@ -1,158 +1,209 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <LinearLayout
+
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:background="@color/mapbox_location_layer_blue"
+        android:gravity="center"
+        android:padding="20dp"
+        android:text="@string/mapestry_editor"
+        android:textSize="28sp" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:paddingStart="8dp"
+        android:paddingEnd="4dp">
+        <TextView
+            android:id="@+id/tv_points_section_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/points_label"
+            android:textSize="24sp"/>
 
         <TextView
+            android:id="@+id/tv_points_hue_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_points_section_label"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:text="@string/color_label"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/tv_points_hue_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_points_section_label"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:text="@string/place_holder"
+            android:textSize="16sp" />
+        <codes.side.andcolorpicker.hsl.HSLColorPickerSeekBar
+            android:id="@+id/sb_points_hue"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/mapestry_editor"
-            android:background="@color/mapbox_location_layer_blue"
-            android:textSize="20sp"
-            android:padding="8dp"
-            android:gravity="center"/>
+            android:layout_below="@+id/tv_points_hue_label"
+            app:hslColoringMode="pure"
+            app:hslMode="hue" />
 
+        <TextView
+            android:id="@+id/tv_points_alpha_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/sb_points_hue"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="16dp"
+            android:text="@string/opacity_label"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/tv_points_alpha_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/sb_points_hue"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:text="@string/place_holder"
+            android:textSize="16sp" />
+
+        <codes.side.andcolorpicker.alpha.HSLAlphaColorPickerSeekBar
+            android:id="@+id/sb_points_alpha"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_points_alpha_label" />
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingStart="8dp"
-            android:paddingEnd="4dp">
+            android:layout_below="@+id/sb_points_alpha"
+            android:layout_marginBottom="16dp"
+            android:layout_marginTop="16dp">
+
             <TextView
-                android:id="@+id/tv_select_map_component"
+                android:id="@+id/tv_points_visibility"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/select_map_component_label"
-                android:layout_marginTop="4dp"
-                android:textSize="16sp"/>
-            <RadioGroup
-                android:layout_width="match_parent"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="16dp"
+                android:text="@string/visibility_label"
+                android:textSize="20sp" />
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/sw_points_visibility"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/tv_select_map_component"
-                android:orientation="horizontal"
-                android:padding="4dp">
-                <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/polygons"/>
-                <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/points"/>
-                <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/background" />
-            </RadioGroup>
+                android:layout_alignParentEnd="true" />
         </RelativeLayout>
+    </RelativeLayout>
+
+    <com.google.android.material.divider.MaterialDivider
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_margin="8dp"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:paddingStart="8dp"
+        android:paddingEnd="4dp">
+        <TextView
+            android:id="@+id/tv_polygons_section_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/polygons_label"
+            android:textSize="24sp"/>
+        <TextView
+            android:id="@+id/tv_polygons_hue_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/color_label"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:layout_below="@+id/tv_polygons_section_label"
+            android:textSize="16sp"/>
+
+        <TextView
+            android:id="@+id/tv_polygons_hue_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_polygons_section_label"
+            android:text="@string/place_holder"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:textSize="16sp" />
+        <codes.side.andcolorpicker.hsl.HSLColorPickerSeekBar
+            android:id="@+id/sb_polygons_hue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_polygons_hue_label"
+            app:hslColoringMode="pure"
+            app:hslMode="hue" />
+
+        <TextView
+            android:id="@+id/tv_polygons_alpha_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/sb_polygons_hue"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:text="@string/opacity_label"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tv_polygons_alpha_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/sb_polygons_hue"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:text="@string/place_holder"
+            android:textSize="16sp" />
+
+        <codes.side.andcolorpicker.alpha.HSLAlphaColorPickerSeekBar
+            android:id="@+id/sb_polygon_alpha"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_polygons_alpha_label" />
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:paddingStart="8dp"
-            android:paddingEnd="4dp">
+            android:layout_below="@+id/sb_polygon_alpha"
+            android:layout_marginBottom="16dp"
+            android:layout_marginTop="16dp">
+
             <TextView
-                android:id="@+id/tv_hue_label"
+                android:id="@+id/tv_polygon_visibility"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/hue_label"
-                android:textSize="16sp"/>
-            <TextView
-                android:id="@+id/tv_hue_value"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/place_holder"
-                android:layout_toEndOf="@+id/tv_hue_label"
-                android:textSize="16sp"/>
-            <codes.side.andcolorpicker.hsl.HSLColorPickerSeekBar
-                android:id="@+id/sb_hue"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/tv_hue_label"
-                app:hslColoringMode="pure"
-                app:hslMode="hue" />
-            <TextView
-                android:id="@+id/tv_alpha_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/alpha_label"
-                android:layout_below="@id/sb_hue"
-                android:textSize="16sp"/>
-            <TextView
-                android:id="@+id/tv_alpha_value"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:layout_below="@id/sb_hue"
-                android:layout_toEndOf="@+id/tv_alpha_label"
-                android:text="@string/place_holder"
+                android:layout_centerVertical="true"
+                android:text="@string/visibility_label"
                 android:textSize="16sp" />
 
-            <codes.side.andcolorpicker.alpha.HSLAlphaColorPickerSeekBar
-                android:id="@+id/sb_alpha"
-                android:layout_width="match_parent"
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/sw_polygons_visibility"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/tv_alpha_label" />
+                android:layout_alignParentEnd="true" />
         </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp">
-            <TextView
-                android:id="@+id/tv_component_visibility"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/visibility_label"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_alignParentStart="true"
-                android:textSize="16sp"/>
-            <RadioGroup
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toEndOf="@+id/tv_component_visibility"
-                android:orientation="horizontal">
-                <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/visibility_on"
-                    android:textSize="16sp"/>
-                <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/visibility_off"
-                    android:textSize="16sp"/>
-            </RadioGroup>
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30sp">
-            <Button
-                android:id="@+id/btn_save"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAllCaps="false"
-                android:backgroundTint="@color/green"
-                android:layout_marginStart="30dp"
-                android:layout_marginEnd="30dp"
-                android:text="@string/save" />
-            <Button
-                android:id="@+id/btn_cancel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAllCaps="false"
-                android:backgroundTint="@color/red"
-                android:layout_toEndOf="@id/btn_save"
-                android:text="@string/cancel" />
-        </RelativeLayout>
-    </LinearLayout>
-</ScrollView>
+    </RelativeLayout>
+</LinearLayout>

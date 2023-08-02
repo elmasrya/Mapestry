@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:mapbox="http://schemas.android.com/apk/res-auto"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:mapbox="http://schemas.android.com/apk/res-auto">
     <com.mapbox.maps.MapView
         android:id="@+id/map_view"
         android:layout_width="match_parent"
@@ -13,12 +11,27 @@
         mapbox:mapbox_resourcesAccessToken="@string/mapbox_access_token">
     </com.mapbox.maps.MapView>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:id="@+id/rl_map_controls"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:src="@android:drawable/ic_menu_manage"
-        android:layout_gravity="bottom|end"
-        app:elevation="6dp"
-        app:pressedTranslationZ="12dp"/>
-</RelativeLayout>
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="4dp">
+
+        <ImageView
+            android:id="@+id/iv_current_location"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:src="@drawable/ic_current_location"
+            android:layout_alignParentEnd="true" />
+
+        <ImageView
+            android:id="@+id/iv_edit_map"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/ic_edit_map"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="50dp"
+            android:layout_below="@+id/iv_current_location" />
+    </RelativeLayout>
+</FrameLayout>
