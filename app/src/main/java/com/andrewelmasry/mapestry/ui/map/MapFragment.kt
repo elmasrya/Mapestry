@@ -118,12 +118,20 @@ class MapFragment : Fragment() {
         ) { style ->
             initLocationComponent()
             setupGesturesListener()
-            println("------------------------")
-            println("layers are ${style.styleLayers}")
-            println("------------------------")
+            val fillLayer = style.getLayerAs<FillLayer>("tampa-parking-tileset")
+            val circleLayer = style.getLayerAs<CircleLayer>("tampa-parking-points-tileset")
+            val lineLayer = style.getLayerAs<LineLayer>("tampa-parking-lines-tileset")
+            mapViewModel.initializeMapPointsLayer(circleLayer)
+            mapViewModel.initializeMapPolygonLayer(fillLayer)
+            mapViewModel.initializeMapLineLayer(lineLayer)
         }
 
-        //TODO: Experiment HERE
+        object : OnMapLoadErrorListener {
+            override fun onMapLoadError(eventData: MapLoadingErrorEventData) {
+                println("------------- Error")
+                println(eventData.message)
+            }
+        }
 
 
 

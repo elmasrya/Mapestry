@@ -31,6 +31,10 @@ class MapViewModel : ViewModel() {
         fillLayerLiveData.value = fillLayer
     }
 
+    fun initializeMapLineLayer(lineLayer: LineLayer?) {
+        lineLayerLiveData.value = lineLayer
+    }
+
     fun updateMapPointsColor(color: String) {
         circleLayerLiveData.value?.circleColor(color)
     }
