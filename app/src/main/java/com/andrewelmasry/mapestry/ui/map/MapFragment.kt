@@ -113,92 +113,20 @@ class MapFragment : Fragment() {
                 .zoom(14.0)
                 .build()
         )
-        /*binding.mapView.getMapboxMap().loadStyleUri(
+        binding.mapView.getMapboxMap().loadStyleUri(
             getString(R.string.mapbox_style_url)
         ) { style ->
             initLocationComponent()
             setupGesturesListener()
-        }*/
+            println("------------------------")
+            println("layers are ${style.styleLayers}")
+            println("------------------------")
+        }
 
-       /* mapView.getMapboxMap().loadStyle(
-            style(styleUri = Style.TRAFFIC_DAY) {
-                +geoJsonSource(id = "earthquakes") {
-                    url(GEOJSON_URL)
-                    cluster(false)
-                }
-                +circleLayer(layerId = "earthquakeCircle", sourceId = "earthquakes") {
-                    circleRadius(get { literal("mag") })
-                    circleColor(Color.RED)
-                    circleOpacity(0.3)
-                    circleStrokeColor(Color.WHITE)
-                }
-            },*/
-
-        binding.mapView.getMapboxMap().loadStyle(
-            style(styleUri = Style.MAPBOX_STREETS) {
-                +geoJsonSource("linesLayer") {
-                    url("asset://line_layer.geojson")
-                }
-                // Specify a unique string as the layer ID (LAYER_ID)
-                // and reference the source ID (SOURCE_ID) added above.
-                +lineLayer("lines", "linesLayer") {
-                    lineColor("#800080")
-                    lineWidth(3.0)
-                }
-                +geoJsonSource("pointsLayer") {
-                    url("asset://points_layer.geojson")
-                }
-                +circleLayer(layerId = "points", sourceId = "pointsLayer") {
-                    circleRadius(25.0)
-                    circleColor("#FF0000")
-                    circleOpacity(0.3)
-                    circleStrokeColor("#ffffff")
-                }
-                +geoJsonSource("polyLayer") {
-                    url("asset://poly_layer.geojson")
-                }
-                +fillLayer(layerId = "polygons", sourceId = "polyLayer") {
-                    fillColor("#FFA500")
-                    fillOpacity(0.8)
-                }
+        //TODO: Experiment HERE
 
 
-            },
-            {
-                initLocationComponent()
-                setupGesturesListener()
-               // initMapEditorListeners()
 
-                binding.mapView.getMapboxMap().getStyle { style ->
-                    // Get an existing layer by referencing its
-                    // unique layer ID (LAYER_ID)
-                    val lineLayer = style.getLayerAs<LineLayer>("lines")
-                    val circleLayer = style.getLayerAs<CircleLayer>("points")
-                    val fillLayer = style.getLayerAs<FillLayer>("polygons")
-
-                    mapViewModel.initializeMapPointsLayer(circleLayer)
-                    mapViewModel.initializeMapPolygonLayer(fillLayer)
-
-
-                    // Update layer properties
-                    //layer?.fillOpacity(0.7)
-                    println("--------")
-
-                }
-                println("----------- Success ")
-                // Map is set up and the style has loaded. Now you can add data or make other map adjustments.
-            },
-            object : OnMapLoadErrorListener {
-                override fun onMapLoadError(eventData: MapLoadingErrorEventData) {
-                    println("------------- Error")
-                    println(eventData.message)
-                    // Error occurred when loading the map, try to handle it gracefully here
-                }
-            }
-        )
-
-
-        //binding.mapView.getMapboxMap().getGeoJsonClusterChildren()
     }
 
     private fun setupGesturesListener() {
