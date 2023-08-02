@@ -1,9 +1,6 @@
 
 package com.andrewelmasry.mapestry.ui.map
 
-import android.content.Context
-import android.location.Location
-import android.location.LocationListener
 import android.location.LocationManager
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,17 +8,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.content.res.AppCompatResources
-import androidx.compose.ui.graphics.Color
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.commit
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import com.andrewelmasry.mapestry.R
 import com.andrewelmasry.mapestry.databinding.FragmentMapBinding
 import com.andrewelmasry.mapestry.helpers.LocationPermissionHelper
+import com.andrewelmasry.mapestry.ui.MapViewModel
 import com.andrewelmasry.mapestry.ui.bottomsheet.MapEditorBottomSheetFragment
 
 import com.mapbox.android.gestures.MoveGestureDetector
@@ -30,20 +23,13 @@ import com.mapbox.maps.Style
 import com.mapbox.maps.extension.style.expressions.dsl.generated.interpolate
 import com.mapbox.geojson.Point
 import com.mapbox.maps.extension.observable.eventdata.MapLoadingErrorEventData
-import com.mapbox.maps.extension.style.StyleContract
-import com.mapbox.maps.extension.style.expressions.dsl.generated.get
-import com.mapbox.maps.extension.style.expressions.dsl.generated.literal
-import com.mapbox.maps.extension.style.expressions.generated.Expression
+import com.mapbox.maps.extension.style.layers.generated.CircleLayer
 import com.mapbox.maps.extension.style.layers.generated.FillLayer
+import com.mapbox.maps.extension.style.layers.generated.LineLayer
 import com.mapbox.maps.extension.style.layers.generated.circleLayer
 import com.mapbox.maps.extension.style.layers.generated.fillLayer
 import com.mapbox.maps.extension.style.layers.generated.lineLayer
 import com.mapbox.maps.extension.style.layers.getLayerAs
-import com.mapbox.maps.extension.style.layers.properties.generated.Visibility
-import com.mapbox.maps.extension.style.sources.Source
-import com.mapbox.maps.extension.style.sources.addSource
-import com.mapbox.maps.extension.style.sources.generated.GeoJsonSource
-import com.mapbox.maps.extension.style.sources.generated.VectorSource
 import com.mapbox.maps.extension.style.sources.generated.geoJsonSource
 import com.mapbox.maps.extension.style.style
 import com.mapbox.maps.plugin.LocationPuck2D
@@ -59,7 +45,7 @@ class MapFragment : Fragment() {
 
     private var _binding: FragmentMapBinding? = null
     private val binding get() = _binding!!
-    private val mapViewModel: MapViewModel by viewModels()
+    private val mapViewModel: MapViewModel by activityViewModels()
     private lateinit var bottomSheetFragment: MapEditorBottomSheetFragment
     private lateinit var locationPermissionHelper: LocationPermissionHelper
     private lateinit var locationManager: LocationManager
@@ -172,8 +158,8 @@ class MapFragment : Fragment() {
                     url("asset://poly_layer.geojson")
                 }
                 +fillLayer(layerId = "polygons", sourceId = "polyLayer") {
-                    fillColor("#800080")
-                    fillOpacity(0.3)
+                    fillColor("#FFA500")
+                    fillOpacity(0.8)
                 }
 
 
@@ -181,16 +167,23 @@ class MapFragment : Fragment() {
             {
                 initLocationComponent()
                 setupGesturesListener()
+               // initMapEditorListeners()
 
                 binding.mapView.getMapboxMap().getStyle { style ->
                     // Get an existing layer by referencing its
                     // unique layer ID (LAYER_ID)
-                    val layer = style.getLayerAs<FillLayer>("linelayer")
+                    val lineLayer = style.getLayerAs<LineLayer>("lines")
+                    val circleLayer = style.getLayerAs<CircleLayer>("points")
+                    val fillLayer = style.getLayerAs<FillLayer>("polygons")
+
+                    mapViewModel.initializeMapPointsLayer(circleLayer)
+                    mapViewModel.initializeMapPolygonLayer(fillLayer)
+
 
                     // Update layer properties
-                    layer?.fillOpacity(0.7)
+                    //layer?.fillOpacity(0.7)
                     println("--------")
-                    println("--------" + layer)
+
                 }
                 println("----------- Success ")
                 // Map is set up and the style has loaded. Now you can add data or make other map adjustments.

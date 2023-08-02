@@ -29,7 +29,7 @@
             android:textSize="24sp"/>
 
         <TextView
-            android:id="@+id/tv_points_hue_label"
+            android:id="@+id/tv_points_color_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tv_points_section_label"
@@ -39,75 +39,79 @@
             android:text="@string/color_label"
             android:textSize="20sp" />
 
-        <TextView
-            android:id="@+id/tv_points_hue_value"
+        <View
+            android:id="@+id/points_color_presenter"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_below="@+id/tv_points_section_label"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_toEndOf="@+id/tv_points_color_label"
+            android:background="@color/black" />
+
+        <Button
+            android:id="@+id/btn_point_color_picker"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tv_points_section_label"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
-            android:text="@string/place_holder"
-            android:textSize="16sp" />
-        <codes.side.andcolorpicker.hsl.HSLColorPickerSeekBar
-            android:id="@+id/sb_points_hue"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tv_points_hue_label"
-            app:hslColoringMode="pure"
-            app:hslMode="hue" />
+            android:layout_marginTop="24dp"
+            android:layout_toEndOf="@+id/points_color_presenter"
+            android:text="Next Color" />
 
         <TextView
-            android:id="@+id/tv_points_alpha_label"
+            android:id="@+id/tv_points_size"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/sb_points_hue"
-            android:layout_marginStart="20dp"
+            android:layout_below="@id/points_color_presenter"
             android:layout_marginTop="24dp"
             android:layout_marginBottom="16dp"
-            android:text="@string/opacity_label"
-            android:textSize="20sp" />
+            android:text="Adjust Size: " />
 
         <TextView
-            android:id="@+id/tv_points_alpha_value"
+            android:id="@+id/tv_points_size_value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/sb_points_hue"
-            android:layout_alignParentEnd="true"
-            android:layout_marginStart="5dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
-            android:text="@string/place_holder"
-            android:textSize="16sp" />
+            android:layout_below="@id/points_color_presenter"
+            android:layout_marginTop="24dp"
+            android:layout_toEndOf="@+id/tv_points_size"
+            android:text="@string/place_holder" />
 
-        <codes.side.andcolorpicker.alpha.HSLAlphaColorPickerSeekBar
-            android:id="@+id/sb_points_alpha"
+        <SeekBar
+            android:id="@+id/sb_points_size"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tv_points_alpha_label" />
-        <RelativeLayout
+            android:max="19"
+            android:progress="0"
+            android:layout_below="@id/tv_points_size"/>
+
+        <TextView
+            android:id="@+id/tv_points_opacity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/sb_points_size"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="16dp"
+            android:text="Adjust Opacity" />
+
+
+        <TextView
+            android:id="@+id/tv_points_opacity_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/sb_points_size"
+            android:layout_marginTop="24dp"
+            android:layout_toEndOf="@+id/tv_points_opacity"
+            android:text="@string/place_holder" />
+
+        <SeekBar
+            android:id="@+id/sb_points_opacity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/sb_points_alpha"
-            android:layout_marginBottom="16dp"
-            android:layout_marginTop="16dp">
-
-            <TextView
-                android:id="@+id/tv_points_visibility"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="16dp"
-                android:text="@string/visibility_label"
-                android:textSize="20sp" />
-            <androidx.appcompat.widget.SwitchCompat
-                android:id="@+id/sw_points_visibility"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true" />
-        </RelativeLayout>
+            android:layout_below="@id/tv_points_opacity"
+            android:max="255"
+            android:progress="255"/>
     </RelativeLayout>
 
     <com.google.android.material.divider.MaterialDivider
@@ -122,88 +126,67 @@
         android:paddingStart="8dp"
         android:paddingEnd="4dp">
         <TextView
-            android:id="@+id/tv_polygons_section_label"
+            android:id="@+id/tv_poly_section_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/polygons_label"
             android:textSize="24sp"/>
+
         <TextView
-            android:id="@+id/tv_polygons_hue_label"
+            android:id="@+id/tv_poly_color_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_poly_section_label"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
             android:text="@string/color_label"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
-            android:layout_below="@+id/tv_polygons_section_label"
-            android:textSize="16sp"/>
+            android:textSize="20sp" />
 
-        <TextView
-            android:id="@+id/tv_polygons_hue_value"
+        <View
+            android:id="@+id/poly_color_presenter"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_below="@+id/tv_poly_section_label"
+            android:layout_margin="10dp"
+            android:layout_toEndOf="@+id/tv_poly_color_label"
+            android:background="@color/black" />
+
+        <Button
+            android:id="@+id/btn_poly_color_picker"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tv_polygons_section_label"
-            android:text="@string/place_holder"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
-            android:textSize="16sp" />
-        <codes.side.andcolorpicker.hsl.HSLColorPickerSeekBar
-            android:id="@+id/sb_polygons_hue"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tv_polygons_hue_label"
-            app:hslColoringMode="pure"
-            app:hslMode="hue" />
+            android:layout_below="@+id/tv_poly_section_label"
+            android:layout_marginTop="24dp"
+            android:layout_toEndOf="@+id/poly_color_presenter"
+            android:text="Next Color" />
 
         <TextView
-            android:id="@+id/tv_polygons_alpha_label"
+            android:id="@+id/tv_poly_opacity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/sb_polygons_hue"
-            android:layout_marginTop="16dp"
+            android:layout_below="@+id/poly_color_presenter"
+            android:layout_marginTop="24dp"
             android:layout_marginBottom="16dp"
-            android:text="@string/opacity_label"
-            android:textSize="16sp" />
+            android:text="Adjust Opacity" />
 
         <TextView
-            android:id="@+id/tv_polygons_alpha_value"
+            android:id="@+id/tv_poly_opacity_value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/sb_polygons_hue"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
-            android:text="@string/place_holder"
-            android:textSize="16sp" />
+            android:layout_toEndOf="@+id/tv_poly_opacity"
+            android:layout_marginTop="24dp"
+            android:layout_below="@+id/poly_color_presenter"
+            android:text="@string/place_holder"/>
 
-        <codes.side.andcolorpicker.alpha.HSLAlphaColorPickerSeekBar
-            android:id="@+id/sb_polygon_alpha"
+
+        <SeekBar
+            android:id="@+id/sb_poly_opacity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tv_polygons_alpha_label" />
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/sb_polygon_alpha"
-            android:layout_marginBottom="16dp"
-            android:layout_marginTop="16dp">
-
-            <TextView
-                android:id="@+id/tv_polygon_visibility"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:text="@string/visibility_label"
-                android:textSize="16sp" />
-
-            <androidx.appcompat.widget.SwitchCompat
-                android:id="@+id/sw_polygons_visibility"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true" />
-        </RelativeLayout>
+            android:layout_below="@id/tv_poly_opacity"
+            android:max="255"
+            android:progress="255"
+            android:layout_marginBottom="16dp"/>
     </RelativeLayout>
 </LinearLayout>
