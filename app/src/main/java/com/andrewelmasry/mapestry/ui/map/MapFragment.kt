@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.fragment.app.Fragment
@@ -131,24 +132,24 @@ class MapFragment : Fragment() {
             println("Layers: ${style.styleLayers}")
             val symbolLayer = style.getLayerAs<SymbolLayer>("tampa-parking-symbol-layer")
             val circleLayer = style.getLayerAs<CircleLayer>("alternative-parking-points")
-            var data = circleLayer?.let { geoJsonSource(it.layerId) }
             //val lineLayer = style.getLayerAs<LineLayer>("tampa-parking-lines-tileset")
             mapViewModel.initializeMapSymbolLayer(symbolLayer = symbolLayer)
-            val layerList = mutableListOf<String>()
-            layerList.add(0,"alternative-parking-points")
+            val points: List<Point> = listOf(
+                Point.fromLngLat(28.0, -82.5),
+                Point.fromLngLat(50.3242, 82.568),
+                Point.fromLngLat( -82.5,28.16),
+                Point.fromLngLat(76.4, -2.52),
+                Point.fromLngLat(48.1, 55.5),
+                Point.fromLngLat(67.2, -22.2),
+            )
 
-            val options = RenderedQueryOptions(layerList, Value.nullValue())
-            val screenCoordinate = ScreenCoordinate(-82.541185, 28.17246)
-
-
-            binding.mapView.getMapboxMap().queryRenderedFeatures(screenCoordinate, options) { expectedFeatures ->
-                if (expectedFeatures.value?.isNotEmpty() == true) {
-                    println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%")
-                }
-
-                println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^")
-
+            var index = 0;
+            for (p in points) {
+                println(index++)
+                addViewAnnotation(p, index)
             }
+
+
             symbolLayer?.iconAllowOverlap(true)
             symbolLayer?.iconImage("rectangle-blue-4")
             symbolLayer?.iconTextFit(IconTextFit.BOTH)
@@ -231,7 +232,7 @@ class MapFragment : Fragment() {
         binding.mapView.gestures.removeOnMoveListener(onMoveListener)
     }
 
-    private fun addViewAnnotation(point: Point) {
+    private fun addViewAnnotation(point: Point, index: Int) {
         // Define the view annotation
         val viewAnnotation = binding.mapView.viewAnnotationManager.addViewAnnotation(
             // Specify the layout resource id
@@ -241,7 +242,9 @@ class MapFragment : Fragment() {
                 geometry(point)
             }
         )
-        AnnotationViewBinding.bind(viewAnnotation)
+        val bindingA = AnnotationViewBinding.bind(viewAnnotation)
+        val tempBinding = bindingA.root.findViewById<TextView>(R.id.tv_annotation)
+        tempBinding.text = "$index Annotation"
     }
 
     override fun onDestroy() {
