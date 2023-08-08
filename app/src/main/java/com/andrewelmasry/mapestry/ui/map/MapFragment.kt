@@ -52,6 +52,7 @@ import com.mapbox.maps.plugin.locationcomponent.location
 import com.mapbox.maps.viewannotation.ViewAnnotationManager
 import com.mapbox.maps.viewannotation.viewAnnotationOptions
 import java.lang.ref.WeakReference
+import kotlin.random.Random
 
 class MapFragment : Fragment() {
 
@@ -135,18 +136,16 @@ class MapFragment : Fragment() {
             //val lineLayer = style.getLayerAs<LineLayer>("tampa-parking-lines-tileset")
             mapViewModel.initializeMapSymbolLayer(symbolLayer = symbolLayer)
             val points: List<Point> = listOf(
-                Point.fromLngLat(28.0, -82.5),
-                Point.fromLngLat(50.3242, 82.568),
+                Point.fromLngLat(-82.531, 28.15),
+                Point.fromLngLat( -82.533,28.13),
                 Point.fromLngLat( -82.5,28.16),
-                Point.fromLngLat(76.4, -2.52),
-                Point.fromLngLat(48.1, 55.5),
-                Point.fromLngLat(67.2, -22.2),
+                Point.fromLngLat( -82.5,28.14),
+                Point.fromLngLat( -82.521,28.17),
+                Point.fromLngLat( -82.51,28.18),
             )
-
             var index = 0;
             for (p in points) {
-                println(index++)
-                addViewAnnotation(p, index)
+                addViewAnnotation(p, index++)
             }
 
 
@@ -232,6 +231,20 @@ class MapFragment : Fragment() {
         binding.mapView.gestures.removeOnMoveListener(onMoveListener)
     }
 
+    private fun addViewAnnotation(point: Point) {
+        // Define the view annotation
+        val viewAnnotation = binding.mapView.viewAnnotationManager.addViewAnnotation(
+            // Specify the layout resource id
+            resId = R.layout.annotation_view,
+            // Set any view annotation options
+            options = viewAnnotationOptions {
+                geometry(point)
+            }
+        )
+        val annotationViewBinding = AnnotationViewBinding.bind(viewAnnotation)
+        val textBinding = annotationViewBinding.root.findViewById<TextView>(R.id.tv_annotation)
+        textBinding.text = " Annotation Text"
+    }
     private fun addViewAnnotation(point: Point, index: Int) {
         // Define the view annotation
         val viewAnnotation = binding.mapView.viewAnnotationManager.addViewAnnotation(
@@ -242,9 +255,11 @@ class MapFragment : Fragment() {
                 geometry(point)
             }
         )
-        val bindingA = AnnotationViewBinding.bind(viewAnnotation)
-        val tempBinding = bindingA.root.findViewById<TextView>(R.id.tv_annotation)
-        tempBinding.text = "$index Annotation"
+        val annotationViewBinding = AnnotationViewBinding.bind(viewAnnotation)
+        val textBinding = annotationViewBinding.root.findViewById<TextView>(R.id.tv_annotation)
+        val random = Random.nextInt(2000, 1000000000)
+
+        textBinding.text = "$random"
     }
 
     override fun onDestroy() {
