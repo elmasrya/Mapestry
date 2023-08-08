@@ -12,24 +12,33 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import com.andrewelmasry.mapestry.R
+import com.andrewelmasry.mapestry.databinding.AnnotationViewBinding
 import com.andrewelmasry.mapestry.databinding.FragmentMapBinding
 import com.andrewelmasry.mapestry.helpers.LocationPermissionHelper
 import com.andrewelmasry.mapestry.ui.MapViewModel
 import com.andrewelmasry.mapestry.ui.bottomsheet.MapEditorBottomSheetFragment
 
 import com.mapbox.android.gestures.MoveGestureDetector
+import com.mapbox.bindgen.Value
 import com.mapbox.maps.CameraOptions
 import com.mapbox.maps.Style
 import com.mapbox.maps.extension.style.expressions.dsl.generated.interpolate
 import com.mapbox.geojson.Point
+import com.mapbox.maps.RenderedQueryGeometry
+import com.mapbox.maps.RenderedQueryOptions
+import com.mapbox.maps.ScreenCoordinate
 import com.mapbox.maps.extension.observable.eventdata.MapLoadingErrorEventData
+import com.mapbox.maps.extension.style.expressions.generated.Expression
 import com.mapbox.maps.extension.style.layers.generated.CircleLayer
 import com.mapbox.maps.extension.style.layers.generated.FillLayer
 import com.mapbox.maps.extension.style.layers.generated.LineLayer
+import com.mapbox.maps.extension.style.layers.generated.SymbolLayer
 import com.mapbox.maps.extension.style.layers.generated.circleLayer
 import com.mapbox.maps.extension.style.layers.generated.fillLayer
 import com.mapbox.maps.extension.style.layers.generated.lineLayer
 import com.mapbox.maps.extension.style.layers.getLayerAs
+import com.mapbox.maps.extension.style.layers.properties.generated.IconTextFit
+import com.mapbox.maps.extension.style.sources.generated.VectorSource
 import com.mapbox.maps.extension.style.sources.generated.geoJsonSource
 import com.mapbox.maps.extension.style.style
 import com.mapbox.maps.plugin.LocationPuck2D
@@ -39,6 +48,8 @@ import com.mapbox.maps.plugin.gestures.gestures
 import com.mapbox.maps.plugin.locationcomponent.OnIndicatorBearingChangedListener
 import com.mapbox.maps.plugin.locationcomponent.OnIndicatorPositionChangedListener
 import com.mapbox.maps.plugin.locationcomponent.location
+import com.mapbox.maps.viewannotation.ViewAnnotationManager
+import com.mapbox.maps.viewannotation.viewAnnotationOptions
 import java.lang.ref.WeakReference
 
 class MapFragment : Fragment() {
@@ -113,17 +124,39 @@ class MapFragment : Fragment() {
                 .zoom(14.0)
                 .build()
         )
-        binding.mapView.getMapboxMap().loadStyleUri(
-            getString(R.string.mapbox_style_url)
-        ) { style ->
+        binding.mapView.getMapboxMap().loadStyleUri(MAP_BOX_URL) { style ->
             initLocationComponent()
             setupGesturesListener()
-            val fillLayer = style.getLayerAs<FillLayer>("tampa-parking-tileset")
-            val circleLayer = style.getLayerAs<CircleLayer>("tampa-parking-points-tileset")
-            val lineLayer = style.getLayerAs<LineLayer>("tampa-parking-lines-tileset")
-            mapViewModel.initializeMapPointsLayer(circleLayer)
-            mapViewModel.initializeMapPolygonLayer(fillLayer)
-            mapViewModel.initializeMapLineLayer(lineLayer)
+            //val fillLayer = style.getLayerAs<FillLayer>("tampa-parking-tileset")
+            println("Layers: ${style.styleLayers}")
+            val symbolLayer = style.getLayerAs<SymbolLayer>("tampa-parking-symbol-layer")
+            val circleLayer = style.getLayerAs<CircleLayer>("alternative-parking-points")
+            var data = circleLayer?.let { geoJsonSource(it.layerId) }
+            //val lineLayer = style.getLayerAs<LineLayer>("tampa-parking-lines-tileset")
+            mapViewModel.initializeMapSymbolLayer(symbolLayer = symbolLayer)
+            val layerList = mutableListOf<String>()
+            layerList.add(0,"alternative-parking-points")
+
+            val options = RenderedQueryOptions(layerList, Value.nullValue())
+            val screenCoordinate = ScreenCoordinate(-82.541185, 28.17246)
+
+
+            binding.mapView.getMapboxMap().queryRenderedFeatures(screenCoordinate, options) { expectedFeatures ->
+                if (expectedFeatures.value?.isNotEmpty() == true) {
+                    println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%")
+                }
+
+                println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^")
+
+            }
+            symbolLayer?.iconAllowOverlap(true)
+            symbolLayer?.iconImage("rectangle-blue-4")
+            symbolLayer?.iconTextFit(IconTextFit.BOTH)
+            symbolLayer?.iconTextFitPadding(listOf(10.0,10.0,10.0,10.0))
+
+
+            println("---------##################### Circle Layer: $circleLayer")
+
         }
 
         object : OnMapLoadErrorListener {
@@ -196,6 +229,19 @@ class MapFragment : Fragment() {
         binding.mapView.location
             .removeOnIndicatorBearingChangedListener(onIndicatorBearingChangedListener)
         binding.mapView.gestures.removeOnMoveListener(onMoveListener)
+    }
+
+    private fun addViewAnnotation(point: Point) {
+        // Define the view annotation
+        val viewAnnotation = binding.mapView.viewAnnotationManager.addViewAnnotation(
+            // Specify the layout resource id
+            resId = R.layout.annotation_view,
+            // Set any view annotation options
+            options = viewAnnotationOptions {
+                geometry(point)
+            }
+        )
+        AnnotationViewBinding.bind(viewAnnotation)
     }
 
     override fun onDestroy() {

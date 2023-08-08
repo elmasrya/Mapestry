@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.SeekBar
+import androidx.compose.material.TextField
 import androidx.fragment.app.activityViewModels
 import codes.side.andcolorpicker.group.PickerGroup
 import codes.side.andcolorpicker.group.registerPickers
@@ -49,7 +50,7 @@ class MapEditorBottomSheetFragment (): BottomSheetDialogFragment() {
                 index = 0
             }
             val colorHEX = colorSet[index];
-            mapViewModel.updateMapPointsColor(colorHEX)
+            //mapViewModel.(colorHEX)
             binding.pointsColorPresenter.setBackgroundColor(Color.parseColor(colorHEX))
             index += 1
 
@@ -60,7 +61,7 @@ class MapEditorBottomSheetFragment (): BottomSheetDialogFragment() {
                 index = 0
             }
             val colorHEX = colorSet[index];
-            mapViewModel.updateMapPolygonColor(colorHEX)
+            //mapViewModel.updateMapPolygonColor(colorHEX)
             binding.polyColorPresenter.setBackgroundColor(Color.parseColor(colorSet[index]))
             index += 1
 
@@ -69,7 +70,7 @@ class MapEditorBottomSheetFragment (): BottomSheetDialogFragment() {
         binding.sbPointsSize.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
                 val actualProgress = progress + 1
-                mapViewModel.updateMapPointsSize(actualProgress.toDouble())
+               // mapViewModel.updateMapPointsSize(actualProgress.toDouble())
                 binding.tvPointsSizeValue.text = actualProgress.toString() + " px"
             }
 
@@ -85,7 +86,7 @@ class MapEditorBottomSheetFragment (): BottomSheetDialogFragment() {
         binding.sbPointsOpacity.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
                 val opacityValue = progress.toFloat() / 255f
-                mapViewModel.updateMapPointsOpacity(opacityValue.toDouble())
+                //mapViewModel.updateMapPointsOpacity(opacityValue.toDouble())
                 binding.tvPointsOpacityValue.text = opacityValue.toString()
             }
 
@@ -102,7 +103,7 @@ class MapEditorBottomSheetFragment (): BottomSheetDialogFragment() {
         binding.sbPolyOpacity.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
                 val opacityValue = progress.toFloat() / 255f
-                mapViewModel.updateMapPolygonOpacity(opacityValue.toDouble())
+                //mapViewModel.updateMapPolygonOpacity(opacityValue.toDouble())
                 binding.tvPolyOpacityValue.text = opacityValue.toString()
             }
 
